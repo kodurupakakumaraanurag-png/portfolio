@@ -25,7 +25,7 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       onShowToast('Please fill out all required fields.');
@@ -33,16 +33,67 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
     }
 
     setSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      // Support Web3Forms if access key is set, otherwise default to FormSubmit AJAX endpoint
+      const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      
+      let res: Response;
+      if (web3Key) {
+        res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: web3Key,
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            from_name: 'Portfolio Contact Form'
+          })
+        });
+      } else {
+        // Use secure FormSubmit key generated for your portfolio
+        const formSubmitKey = import.meta.env.VITE_FORMSUBMIT_KEY || '50a545bad3f6509221383afd6e38d1c4';
+        res = await fetch(`https://formsubmit.co/ajax/${formSubmitKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            _subject: `Portfolio Inquiry: ${formData.subject} (${formData.name})`,
+            _template: 'table',
+            _captcha: 'false'
+          })
+        });
+      }
+
+      if (res.ok) {
+        onShowToast('🎉 Thank you! Your message has been sent to my inbox.');
+        setFormData({
+          name: '',
+          email: '',
+          subject: 'Data Analyst / AI & ML Role Opportunity',
+          message: ''
+        });
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to send message via form endpoint.');
+      }
+    } catch (err: any) {
+      console.error('Email submission error:', err);
+      // Fallback to mailto link if direct AJAX fails
+      const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      
+      onShowToast('⚠️ Sending form failed. Opening your email app instead...');
+      window.location.href = mailtoUrl;
+    } finally {
       setSubmitting(false);
-      onShowToast('🎉 Thank you! Your message has been sent successfully.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: 'Data Analyst / AI & ML Role Opportunity',
-        message: ''
-      });
-    }, 1200);
+    }
   };
 
   return (

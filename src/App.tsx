@@ -5,7 +5,6 @@ import { TechStack } from './components/TechStack';
 import { Projects } from './components/Projects';
 import { LivePlayground } from './components/LivePlayground';
 import { Experience } from './components/Experience';
-import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
@@ -60,7 +59,6 @@ export function App() {
         <Projects />
         <LivePlayground />
         <Experience />
-        <Testimonials />
         <Contact onShowToast={showToast} />
       </main>
 
