@@ -53,9 +53,9 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
           })
         });
       } else {
-        // Use secure FormSubmit key generated for your portfolio
-        const formSubmitKey = import.meta.env.VITE_FORMSUBMIT_KEY || '50a545bad3f6509221383afd6e38d1c4';
-        res = await fetch(`https://formsubmit.co/ajax/${formSubmitKey}`, {
+        // Direct FormSubmit AJAX endpoint targeting your email address
+        const targetEmail = PERSONAL_INFO.email;
+        res = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
