@@ -11,11 +11,11 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume, onShowToast }) => {
   const titles = [
-    'Data Analyst',
-    'B.Tech CSE (AI & ML) Student',
-    'Python & SQL Specialist',
+    'Junior Data Analyst',
+    'SQL & Python Specialist',
     'Excel & Power BI Dashboard Creator',
-    'Exploratory Data Analysis Specialist'
+    'ETL & Data Cleaning Engineer',
+    'B.Tech CSE (AI & ML)'
   ];
 
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -46,15 +46,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume, onShowT
 
   const codeSnippet = `{
   "candidate": "${PERSONAL_INFO.name}",
-  "specialization": "${PERSONAL_INFO.title}",
-  "degree": "B.Tech CSE (AI & ML) 2022-2026",
-  "technical_skills": ["Python", "SQL", "Pandas", "NumPy", "Excel", "Power BI", "Scikit-learn"],
-  "focus": "Data Cleaning, EDA, Excel Dashboards & ML Demand Forecasting",
-  "status": "Available for Data Analyst & AI/ML Roles",
-  "key_stats": {
-    "education": "Malla Reddy Institute of Technology and Science",
-    "data_accuracy_boost": "25%",
-    "location": "Hyderabad, Telangana"
+  "role": "${PERSONAL_INFO.title}",
+  "company": "Vangrove Tech Private Limited",
+  "technical_skills": ["Python", "SQL", "Advanced Excel", "Power BI", "Pandas", "NumPy", "Matplotlib"],
+  "focus": "ETL Workflows, SQL Optimization, Data Quality, Executive Dashboards & EDA",
+  "status": "Junior Data Analyst @ Vangrove Tech | Open for Opportunities",
+  "key_metrics": {
+    "report_turnaround_time": "-30%",
+    "data_quality_improvement": "+20%",
+    "query_execution_speed": "+35%",
+    "stakeholder_kpi_visibility": "+40%"
   }
 }`;
 
@@ -179,15 +180,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume, onShowT
                   {'{'}<br />
                   &nbsp;&nbsp;<span className="json-key">"candidate"</span>: <span className="json-string">"{PERSONAL_INFO.name}"</span>,<br />
                   &nbsp;&nbsp;<span className="json-key">"role"</span>: <span className="json-string">"{PERSONAL_INFO.title}"</span>,<br />
-                  &nbsp;&nbsp;<span className="json-key">"core_skills"</span>: [<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-string">"Python"</span>, <span className="json-string">"SQL"</span>, <span className="json-string">"Pandas"</span>,<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-string">"Excel Dashboards"</span>, <span className="json-string">"Power BI"</span>, <span className="json-string">"Scikit-learn"</span><br />
+                  &nbsp;&nbsp;<span className="json-key">"company"</span>: <span className="json-string">"Vangrove Tech Private Limited"</span>,<br />
+                  &nbsp;&nbsp;<span className="json-key">"skills"</span>: [<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-string">"Python"</span>, <span className="json-string">"SQL"</span>, <span className="json-string">"Advanced Excel"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-string">"Power BI"</span>, <span className="json-string">"Pandas"</span>, <span className="json-string">"NumPy"</span><br />
                   &nbsp;&nbsp;],<br />
-                  &nbsp;&nbsp;<span className="json-key">"domain"</span>: <span className="json-string">"Data Cleaning & EDA"</span>,<br />
-                  &nbsp;&nbsp;<span className="json-key">"status"</span>: <span className="json-green">"Seeking Data Analyst Roles"</span>,<br />
-                  &nbsp;&nbsp;<span className="json-key">"impact_metrics"</span>: {'{'}<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"data_accuracy_boost"</span>: <span className="json-number">"25%"</span>,<br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"data_cleaning_readiness"</span>: <span className="json-number">"100%"</span><br />
+                  &nbsp;&nbsp;<span className="json-key">"impact"</span>: {'{'}<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"report_turnaround"</span>: <span className="json-number">"-30%"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"data_quality"</span>: <span className="json-number">"+20%"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"query_speed"</span>: <span className="json-number">"+35%"</span>,<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span className="json-key">"kpi_visibility"</span>: <span className="json-number">"+40%"</span><br />
                   &nbsp;&nbsp;{'}'}<br />
                   {'}'}
                 </code>
@@ -198,9 +200,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume, onShowT
             <div className="code-card-footer">
               <div className="status-item">
                 <span className="pulse-dot"></span>
-                <span>Analytics Engine: <strong>READY</strong></span>
+                <span>Analytics Engine: <strong>ACTIVE</strong></span>
               </div>
-              <span className="latency-tag">⚡ Data Analytics Active</span>
+              <span className="latency-tag">⚡ Junior Data Analyst</span>
             </div>
           </div>
         </div>
@@ -208,3 +210,4 @@ export const Hero: React.FC<HeroProps> = ({ onOpenContact, onOpenResume, onShowT
     </section>
   );
 };
+
